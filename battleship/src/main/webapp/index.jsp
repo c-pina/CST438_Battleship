@@ -23,7 +23,7 @@
          for(int r = 0; r < 10; r++){
             out.print("<div class = \"row\">");
             for(int c = 0; c < 10; c++){
-               out.print("<div id = player-grid-" + r + c + " class = \"cell\"></div>");
+               out.print("<div id = player-grid-" + c + r + " class = \"cell\"></div>");
             }
             out.print("</div>");
          } 
@@ -37,7 +37,7 @@
          for(int r = 0; r < 10; r++){
             out.print("<div class = \"row\">");
             for(int c = 0; c < 10; c++){
-               out.print("<div id = opponent-grid-" + r + c + " class = \"cell\"></div>");
+               out.print("<div id = opponent-grid-" + c + r + " class = \"cell\"></div>");
             }
             out.print("</div>");
          } 

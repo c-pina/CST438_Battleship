@@ -31,11 +31,13 @@ public class ComputerPlayer extends Player{
 			
 			// Check if this Point has already been guessed
 			boolean alreadyGuessed = false;
-			for (Point p : this.getGuesses()) {
-				if (p.equals(guess)) {
-					alreadyGuessed = true;
-					break;
-				}
+			if(this.getNumGuesses() != 0) {
+   			for (int i = 0; i < this.getNumGuesses(); i++) {
+   				if (this.guesses[0].equals(guess)) {
+   					alreadyGuessed = true;
+   					break;
+   				}
+   			}
 			}
 			
 			// Return the point if not already guessed, otherwise loop again

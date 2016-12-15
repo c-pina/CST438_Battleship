@@ -74,6 +74,10 @@ header {
    background-color: #616668; 
 }
 
+.guessed {
+   background-color: #A7DBD8;
+}
+
 .hit {
    background-color: #D93D04; 
 }

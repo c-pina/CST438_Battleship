@@ -132,6 +132,7 @@ public class GameController extends HttpServlet {
 		GameModel game = games.get(gameId);
 		Player human = game.getPlayer1();
 		ComputerPlayer computer = (ComputerPlayer)game.getPlayer2();
+		game.setGameState(2);
 
 		StringBuffer body = new StringBuffer();
 		String line = null;
