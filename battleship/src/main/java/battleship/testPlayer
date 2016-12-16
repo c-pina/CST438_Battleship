@@ -1,0 +1,124 @@
+package battleship;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.util.Hashtable;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+public class testPlayer {
+
+	private Player player;
+
+	@Before
+	public void setup() {
+		player = new Player();
+	}
+
+	@After
+	public void tearDown() {
+		player = null;
+	}
+
+	@Test
+	public void test_Player() {
+		assertTrue(player instanceof Player);
+	}
+
+	@Test
+	public void testaddGuess_toomanyguess() {
+		Point guess = new Point(3, 4, false);
+		player.setNumGuesses((Player.GRID_WIDTH * Player.GRID_WIDTH));
+
+		assertEquals(false, player.addGuess(guess));
+	}
+
+	@Test
+	public void testaddGuess_addpoint() {
+		Point guess = new Point(3, 4, false);
+		player.addGuess(guess);
+		assertEquals(true, player.getGuesses()[0].equals(guess));
+	}
+
+	@Test
+	public void testaddGuess_addguess() {
+		Point guess = new Point(3, 4, false);
+		player.addGuess(guess);
+		assertEquals(1, player.getNumGuesses());
+	}
+
+	@Test
+	public void testdecrementShipCount_goesdown() {
+		player.decrementShipCount();
+		assertEquals(0, player.getShipCount());
+	}
+
+	@Test
+	public void testdecrementShipCount_notbelowzero() {
+		player.decrementShipCount();
+		assertEquals(0, player.getShipCount());
+	}
+
+	@Test
+	public void testhasShips() {
+		Point[] currentpoints = new Point[4];
+
+		currentpoints[0] = new Point(0, 1, false);
+		currentpoints[1] = new Point(0, 2, false);
+		currentpoints[2] = new Point(0, 3, false);
+		currentpoints[3] = new Point(0, 4, false);
+
+		Location shiploc = new Location(currentpoints);
+
+		Hashtable<String, Ship> tempships = new Hashtable<String, Ship>();
+		tempships.put("Carrier", new Ship("Carrier", 0, shiploc));
+
+		player.setShips(tempships);
+
+		assertEquals(true, player.hasShips());
+	}
+
+	@Test
+	public void testgetShipOnPoint() {
+		Point[] currentpoints = new Point[4];
+
+		currentpoints[0] = new Point(0, 1, false);
+		currentpoints[1] = new Point(0, 2, false);
+		currentpoints[2] = new Point(0, 3, false);
+		currentpoints[3] = new Point(0, 4, false);
+
+		Location shiploc = new Location(currentpoints);
+
+		Hashtable<String, Ship> tempships = new Hashtable<String, Ship>();
+		tempships.put("Carrier", new Ship("Carrier", 0, shiploc));
+
+		player.setShips(tempships);
+
+		Point point = new Point(0, 1, false);
+		assertTrue(player.getShipOnPoint(point) instanceof Ship);
+	}
+
+	@Test
+	public void testhasShipOnPoint() {
+		Point[] currentpoints = new Point[4];
+
+		currentpoints[0] = new Point(0, 1, false);
+		currentpoints[1] = new Point(0, 2, false);
+		currentpoints[2] = new Point(0, 3, false);
+		currentpoints[3] = new Point(0, 4, false);
+
+		Location shiploc = new Location(currentpoints);
+
+		Hashtable<String, Ship> tempships = new Hashtable<String, Ship>();
+		tempships.put("Carrier", new Ship("Carrier", 0, shiploc));
+
+		player.setShips(tempships);
+
+		Point point = new Point(0, 1, false);
+		assertTrue(player.hasShipOnPoint(point));
+	}
+
+}
