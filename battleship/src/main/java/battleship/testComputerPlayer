@@ -1,0 +1,57 @@
+package battleship;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+public class testComputerPlayer {
+
+	private ComputerPlayer cplayer;
+
+	@Before
+	public void setup() {
+		cplayer = new ComputerPlayer();
+	}
+
+	@After
+	public void tearDown() {
+		cplayer = null;
+	}
+
+	@Test
+	public void test_ComputerPlayer() {
+		assertTrue(cplayer instanceof ComputerPlayer);
+	}
+
+	// Revealed an null point error, iterating over an array that has null
+	// Points (100 null initialized points are made on a new player).
+	@Test
+	public void testmakeGuess_inbounds() {
+		List<Point> guesses = new ArrayList<Point>();
+		boolean inbounds = true;
+		while (guesses.size() <= 99) {
+			if (cplayer.makeGuess().getX() > Player.GRID_WIDTH || cplayer.makeGuess().getY() > Player.GRID_WIDTH) {
+				inbounds = false;
+			}
+			guesses.add(cplayer.makeGuess());
+		}
+		assertEquals(true, inbounds);
+	}
+
+	@Test
+	public void testmakeGuess_canfillentireboard() {
+		List<Point> guesses = new ArrayList<Point>();
+		while (guesses.size() <= 99) {
+			guesses.add(cplayer.makeGuess());
+		}
+
+		assertEquals(100, guesses.size());
+	}
+
+}
