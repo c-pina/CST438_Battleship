@@ -1,0 +1,75 @@
+package battleship;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+//depends on location
+public class testShip {
+
+	private Ship ship1;
+	private Ship ship2;
+
+	@Before
+	public void setup() {
+		String type = "Submarine";
+		int hits = 99;
+		Point[] currentPoints = new Point[4];
+		for (int i = 0; i < currentPoints.length; i++) {
+			currentPoints[i] = new Point(i, i + 1, false);
+		}
+
+		Location location = new Location(currentPoints);
+
+		ship1 = new Ship(type, hits);
+		ship2 = new Ship(type, hits, location);
+	}
+
+	@After
+	public void tearDown() {
+		ship1 = null;
+		ship2 = null;
+	}
+
+	@Test
+	public void testship1() {
+		assertTrue(ship1 instanceof Ship && ship1.getLocation().getPoints() == null);
+	}
+
+	@Test
+	public void testship2() {
+		assertTrue(ship1 instanceof Ship && ship2.getLocation().getPoints() != null);
+	}
+
+	@Test
+	public void testdecrementHits_goesdown() {
+		ship1.decrementHits();
+		assertEquals(98, ship1.getHits());
+	}
+
+	@Test
+	public void testdecrementHits_notbelowzero() {
+		ship1.setHits(0);
+		ship1.decrementHits();
+		assertEquals(0, ship1.getHits());
+	}
+
+	@Test
+	public void testToString1() {
+		String expected = "{\"type\":\"" + "Submarine" + "\", \"hits\":\"" + "99" + "\", \"location\":\""
+				+ "Location [points=null]" + "\"}";
+		assertEquals(expected, ship1.toString());
+	}
+
+	@Test
+	public void testToString2() {
+		String expected = "{\"type\":\"" + "Submarine" + "\", \"hits\":\"" + "99" + "\", \"location\":\""
+				+ "Location [points=[Point [x=0, y=1, hit=false], Point [x=1, y=2, hit=false], Point [x=2, y=3, hit=false], Point [x=3, y=4, hit=false]]]"
+				+ "\"}";
+		assertEquals(expected, ship2.toString());
+	}
+
+}
