@@ -1,0 +1,60 @@
+package battleship;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+public class testPoint {
+
+	private Point point;
+
+	@Before
+	public void setup() {
+		int x = 1;
+		int y = 2;
+		boolean hit = true;
+		point = new Point(x, y, hit);
+	}
+
+	@After
+	public void tearDown() {
+		point = null;
+	}
+
+	@Test
+	public void test_Point() {
+		assertTrue(point instanceof Point);
+	}
+
+	@Test
+	public void testIsHit() {
+		assertTrue(point.isHit());
+	}
+
+	// depends on testIsHit()
+	@Test
+	public void setIsHit() {
+		point.setHit(false);
+		assertEquals(false, point.isHit());
+	}
+
+	// depends on testGetY()
+	@Test
+	public void testEquals() {
+		// x y hit
+		Point samepoint = new Point(1, 2, true);
+		Point diffxpoint = new Point(2, 2, false);
+		Point diffypoint = new Point(1, 1, false);
+		assertTrue(samepoint.equals(point) && !samepoint.equals(diffxpoint) && !samepoint.equals(diffypoint));
+	}
+
+	@Test
+	public void testToString() {
+		String expected = "Point [x=" + "1" + ", y=" + "2" + ", hit=" + "true" + "]";
+		assertEquals(expected, point.toString());
+	}
+
+}
