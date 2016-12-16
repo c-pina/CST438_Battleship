@@ -261,7 +261,7 @@ public class GameController extends HttpServlet {
 		Set<String> keys = ships.keySet();
 		for(String key : keys){
 			Ship currentShip = ships.get(key);
-			int length = currentShip.getHits();
+			int length = ((Ship) currentShip).getHits();
 
 			// Select a random number 0-1 to determine orientation of ship
 			Random rand = new Random();

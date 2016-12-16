@@ -8,7 +8,7 @@ public class Player {
 	 * Guess tracking
 	 */
 	protected static final int GRID_WIDTH = 10; // the number of squares in a row/column
-	private Point[] guesses;
+	protected Point[] guesses;
 	private int numGuesses;
 	private int shipCount;
 	
