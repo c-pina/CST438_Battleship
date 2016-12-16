@@ -1,0 +1,45 @@
+package battleship;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+public class testGameModel {
+
+	private Player player;
+	private GameModel gamemodel;
+
+	@Before
+	public void setup() {
+		gamemodel = new GameModel(2);
+		player = new Player();
+	}
+
+	@After
+	public void tearDown() {
+		gamemodel = null;
+	}
+
+	@Test
+	public void test_GameModel() {
+		assertTrue(gamemodel instanceof GameModel);
+	}
+
+	@Test
+	public void testAddPlayer1() {
+		player.setNumGuesses(2);
+		gamemodel.addPlayer1(player);
+		assertEquals(player, gamemodel.getPlayer1());
+	}
+
+	@Test
+	public void testAddPlayer2() {
+		player.setNumGuesses(3);
+		gamemodel.addPlayer2(player);
+		assertEquals(player, gamemodel.getPlayer2());
+	}
+
+}
