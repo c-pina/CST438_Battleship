@@ -1,0 +1,87 @@
+package battleship;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+public class testLocation {
+
+	Location loc;
+
+	@Before
+	public void setup() {
+		Point[] currentPoints = new Point[4];
+		for (int i = 0; i < currentPoints.length; i++) {
+			currentPoints[i] = new Point(i, i + 1, false);
+		}
+
+		loc = new Location(currentPoints);
+
+	}
+
+	@After
+	public void teardown() {
+		loc = null;
+	}
+
+	@Test
+	public void testpoint() {
+		assertTrue(loc instanceof Location);
+	}
+
+	@Test
+	public void test_Location() {
+		assertTrue(loc instanceof Location);
+	}
+
+	@Test
+	public void testGetPoints() {
+		assertNotNull(loc.getPoints());
+		Point[] testpoints = new Point[4];
+		for (int i = 0; i < testpoints.length; i++) {
+			testpoints[i] = new Point(i, i + 1, false);
+		}
+		int counter = 0;
+		for (Point point : loc.getPoints()) {
+			assertTrue(point.equals(testpoints[counter]));
+			counter++;
+		}
+	}
+
+	@Test
+	public void testGetSinglePoint() {
+		assertNotNull(loc.getSinglePoint(1, 2));
+		Point point = loc.getSinglePoint(1, 2);
+		assertTrue(point.getX() == 1 && point.getY() == 2);
+	}
+
+	// depends on testGetPoints passing since private x/y aren't exposed.
+	@Test
+	public void testSetPoints() {
+		Point[] testpoints = new Point[4];
+		for (int i = 0; i < testpoints.length; i++) {
+			testpoints[i] = new Point(i + 100, i + 101, false);
+		}
+
+		loc.setPoints(testpoints);
+
+		int counter = 0;
+		for (Point point : loc.getPoints()) {
+			assertTrue(point.equals(testpoints[counter]));
+			counter++;
+		}
+	}
+
+	@Test
+	public void testToString() {
+		String expected = "Location [points="
+				+ "[Point [x=0, y=1, hit=false], Point [x=1, y=2, hit=false], Point [x=2, y=3, hit=false], Point [x=3, y=4, hit=false]]"
+				+ "]";
+		assertEquals(expected, loc.toString());
+	}
+
+}
